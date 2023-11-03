@@ -1,10 +1,9 @@
+import React, { useState } from 'react';
 
-import * as React from 'react';
 
 function Board() {
-  const squares = Array(9).fill(null);
-  const [xIsNext, setXIsNext] = React.useState(true);
-  }
+  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [xIsNext, setXIsNext] = useState(true);
 
   function selectSquare(square) {
     if (squares[square] || calculateWinner(squares)) {
@@ -16,11 +15,13 @@ function Board() {
     setXIsNext(!xIsNext);
   }
 
+
   function restart() {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
   }
 
+}
   function renderSquare(i) {
     return (
       <button
@@ -108,7 +109,17 @@ function calculateWinner(squares) {
 }
 
 function App() {
-  return <Game />;
+  const status = calculateStatus(winner, squares, nextValue);
+
+  return (
+    <div className="flex flex-col items-center">
+      <div className="text-2xl font-bold mb-4">{status}</div>
+      <div className="grid grid-cols-3 gap-1">
+        {/* ...other JSX code */}
+      </div>
+    </div>
+  );
+
 }
 
 export default App;
